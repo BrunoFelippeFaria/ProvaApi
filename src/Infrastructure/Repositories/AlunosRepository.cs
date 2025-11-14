@@ -23,4 +23,10 @@ public class AlunosRepository(AppDbContext context) : IAlunosRepository
         return aluno;
     }
 
+    public async Task Add (Aluno aluno)
+    {
+        await _context.Alunos.AddAsync(aluno);
+        await _context.SaveChangesAsync();
+    }
+
 }

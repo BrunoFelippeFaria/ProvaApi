@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Application.UseCases.Alunos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -22,5 +23,12 @@ public class TesteController(IMediator mediator) : ControllerBase
     {
         var aluno = await _mediator.Send(new GetAlunoQuery(id));
         return Ok(aluno);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> AdicionarAluno([FromBody] CreateAlunoCommand command)
+    {
+        await _mediator.Send(command);
+        return Ok();
     }
 }
