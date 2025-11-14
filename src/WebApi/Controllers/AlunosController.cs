@@ -31,4 +31,11 @@ public class TesteController(IMediator mediator) : ControllerBase
         await _mediator.Send(command);
         return Ok();
     }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeletarAluno([FromRoute] int id)
+    {
+        await _mediator.Send(new DeleteAlunoCommand(id));
+        return Ok();
+    }
 }

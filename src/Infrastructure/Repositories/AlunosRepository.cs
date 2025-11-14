@@ -29,4 +29,10 @@ public class AlunosRepository(AppDbContext context) : IAlunosRepository
         await _context.SaveChangesAsync();
     }
 
+    public async Task Delete (Aluno aluno)
+    {
+        _context.Alunos.Remove(aluno);
+        await _context.SaveChangesAsync();
+    }
+
 }
