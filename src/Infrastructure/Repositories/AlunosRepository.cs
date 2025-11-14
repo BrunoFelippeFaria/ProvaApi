@@ -14,4 +14,13 @@ public class AlunosRepository(AppDbContext context) : IAlunosRepository
         var alunos = await _context.Alunos.ToArrayAsync();
         return alunos;
     }
+
+    public async Task<Aluno?> GetById(int Id)
+    {
+        var aluno = await _context.Alunos
+            .FirstOrDefaultAsync(a => a.Id == Id);
+        
+        return aluno;
+    }
+
 }

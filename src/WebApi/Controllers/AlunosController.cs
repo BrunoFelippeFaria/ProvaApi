@@ -1,6 +1,4 @@
-using System.Threading.Tasks;
 using Application.UseCases.Alunos;
-using Infrastructure.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,5 +15,12 @@ public class TesteController(IMediator mediator) : ControllerBase
     {
         var alunos = await _mediator.Send(new GetAllAlunosQuery());
         return Ok(alunos);
+    }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> ConsultarAluno([FromRoute] int id)
+    {
+        var aluno = await _mediator.Send(new GetAlunoQuery(id));
+        return Ok(aluno);
     }
 }
