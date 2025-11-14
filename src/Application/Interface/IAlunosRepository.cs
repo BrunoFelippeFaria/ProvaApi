@@ -8,4 +8,5 @@ public interface IAlunosRepository
     public Task<Aluno?> GetById(int Id);
     public Task Add (Aluno aluno);
     public Task Delete (Aluno aluno);
+    public Task Save ();
 }

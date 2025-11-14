@@ -35,4 +35,9 @@ public class AlunosRepository(AppDbContext context) : IAlunosRepository
         await _context.SaveChangesAsync();
     }
 
+    public async Task Save ()
+    {
+        await _context.SaveChangesAsync();
+    }
+
 }

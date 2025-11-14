@@ -38,4 +38,13 @@ public class TesteController(IMediator mediator) : ControllerBase
         await _mediator.Send(new DeleteAlunoCommand(id));
         return Ok();
     }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateAluno([FromRoute] int id, [FromBody] UpdateAlunoCommand command)
+    {
+        var cmd = command with { Id = id };
+        await _mediator.Send(cmd);
+
+        return Ok();
+    }
 }
