@@ -14,37 +14,37 @@ public class TesteController(IMediator mediator) : ControllerBase
     [HttpGet]
     public async Task<IActionResult> ConsultarAlunos()
     {
-        var alunos = await _mediator.Send(new GetAllAlunosQuery());
-        return Ok(alunos);
+        var result = await _mediator.Send(new GetAllAlunosQuery());
+        return result.ToActionResult();
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> ConsultarAluno([FromRoute] int id)
     {
-        var aluno = await _mediator.Send(new GetAlunoQuery(id));
-        return Ok(aluno);
+        var result = await _mediator.Send(new GetAlunoQuery(id));
+        return result.ToActionResult();
     }
 
     [HttpPost]
     public async Task<IActionResult> AdicionarAluno([FromBody] CreateAlunoCommand command)
     {
-        await _mediator.Send(command);
-        return Ok();
+        var result = await _mediator.Send(command);
+        return result.ToActionResult();
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeletarAluno([FromRoute] int id)
     {
-        await _mediator.Send(new DeleteAlunoCommand(id));
-        return Ok();
+        var result = await _mediator.Send(new DeleteAlunoCommand(id));
+        return result.ToActionResult();
     }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateAluno([FromRoute] int id, [FromBody] UpdateAlunoCommand command)
     {
         var cmd = command with { Id = id };
-        await _mediator.Send(cmd);
+        var result = await _mediator.Send(cmd);
 
-        return Ok();
+        return result.ToActionResult();
     }
 }
